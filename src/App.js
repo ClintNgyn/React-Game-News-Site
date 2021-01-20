@@ -1,7 +1,15 @@
-import { popularGames } from './api';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadGames } from './store/actions';
 
 function App() {
-  return <div className='App'>{popularGames()}</div>;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log('use effect called');
+    dispatch(loadGames());
+  }, []);
+
+  return <div className='App'></div>;
 }
 
 export default App;

@@ -1,14 +1,23 @@
-const moment = require('moment');
+import moment from 'moment';
 
-const base_url = 'http://api.rawg.io/api';
-const monthDay = moment().format('MM-DD');
-const year = moment().format('YYYY');
+const year = new Date().getFullYear();
+const _month_day = moment().format(`-MM-DD`);
 
-export const popularGames = () => {
-  //return popular games from last year to this year
-  return `${base_url}/games?dates=${
-    year - 1
-  }-${monthDay},${year}-${monthDay}&ordering=-rating&page_size=15`;
+const fullUrl = (dates, ordering, page_size = 15) => {
+  return `http://api.rawg.io/api/games?dates=${dates}&ordering=-${ordering}&page_size=${page_size}`;
 };
 
-// console.log(popularGames());
+export const getPopularGames = () => {
+  const dates = `${year - 1 + _month_day},${year + _month_day}`;
+  return fullUrl(dates, 'rating');
+};
+
+export const getUpComingGames = () => {
+  const dates = `${year + _month_day},${year + 1 + _month_day}`;
+  return fullUrl(dates, 'added');
+};
+
+export const getNewGames = () => {
+  const dates = `${year - 1 + _month_day},${year + _month_day}`;
+  return fullUrl(dates, 'released');
+};
