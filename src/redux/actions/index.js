@@ -1,3 +1,3 @@
-import { loadGames } from './gamesAction';
+import { loadGames } from './games';
 
 export { loadGames };
