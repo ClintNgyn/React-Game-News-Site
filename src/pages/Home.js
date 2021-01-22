@@ -10,9 +10,10 @@ import { Game } from '../components';
 
 // Styled Components
 const GameList = styled(motion.div)`
+  margin-bottom: 2rem;
   padding: 0 3rem;
   h2 {
-    padding: 5rem 0;
+    padding: 5rem 0 3rem 0;
   }
 `;
 
@@ -29,7 +30,6 @@ const Home = () => {
 
   // Fetch data
   useEffect(() => {
-    console.log('use effect called');
     dispatch(loadGames());
   }, [dispatch]);
 
@@ -43,6 +43,32 @@ const Home = () => {
         <h2>Upcoming Games</h2>
         <Games>
           {upcomingGames.map(({ id, name, released, background_image }) => (
+            <Game
+              key={id}
+              id={id}
+              name={name}
+              released={released}
+              background_image={background_image}
+            />
+          ))}
+        </Games>
+
+        <h2>Popular Games</h2>
+        <Games>
+          {popularGames.map(({ id, name, released, background_image }) => (
+            <Game
+              key={id}
+              id={id}
+              name={name}
+              released={released}
+              background_image={background_image}
+            />
+          ))}
+        </Games>
+
+        <h2>New Games</h2>
+        <Games>
+          {newGames.map(({ id, name, released, background_image }) => (
             <Game
               key={id}
               id={id}

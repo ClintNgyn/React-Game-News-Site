@@ -1,9 +1,11 @@
 import { Home } from './pages';
 
+import { GlobalStyles } from './components';
+
 function App() {
   return (
     <div className='App'>
-      <h1>app</h1>
+      <GlobalStyles />
       <Home />
     </div>
   );

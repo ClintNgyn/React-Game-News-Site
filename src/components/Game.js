@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+import { useDispatch } from 'react-redux';
+import { loadGameDetails } from '../redux/actions';
+
 // Styled Components
 const StyledGame = styled(motion.div)`
   min-height: 30vh;
@@ -17,8 +20,15 @@ const StyledGame = styled(motion.div)`
 `;
 
 const Game = ({ id, name, released, background_image }) => {
+  const dispatch = useDispatch();
+
+  // Load game details
+  const loadDetailsHandler = () => {
+    dispatch(loadGameDetails(id));
+  };
+
   return (
-    <StyledGame>
+    <StyledGame onClick={loadDetailsHandler}>
       <h3>{name}</h3>
       <p>{released}</p>
       <img src={background_image} alt={name} />
