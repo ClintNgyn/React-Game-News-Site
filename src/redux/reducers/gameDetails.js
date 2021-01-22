@@ -1,4 +1,4 @@
-const initState = { game: {}, screenshots: {} };
+const initState = { game: {}, screenshots: [] };
 
 const gameDetailsReducer = (
   state = initState,

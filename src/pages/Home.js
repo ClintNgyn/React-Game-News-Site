@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { loadGames } from '../redux/actions';
-
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { Game } from '../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadGames } from '../redux/actions';
+
+import { Game, GameDetails } from '../components';
 
 // Styled Components
 const GameList = styled(motion.div)`
@@ -39,6 +39,7 @@ const Home = () => {
 
   return (
     <div>
+      {/* <GameDetails /> */}
       <GameList>
         <h2>Upcoming Games</h2>
         <Games>
