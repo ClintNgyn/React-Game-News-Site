@@ -35,11 +35,10 @@ const Detail = styled(motion.div)`
     width: 100%;
   }
 `;
+
 const GameDetails = () => {
-  const {
-    game: { name, rating, platforms = [], description_raw, background_image },
-    screenshots,
-  } = useSelector((state) => state.gameDetails);
+  const { game, screenshots } = useSelector((state) => state.gameDetails);
+  const { name, rating, platforms, description_raw, background_image } = game;
 
   return (
     <CardShadow>
@@ -53,7 +52,7 @@ const GameDetails = () => {
           <div className='info'>
             <h3>Platform</h3>
             <div className='platforms'>
-              {platforms.map(({ platform }) => (
+              {platforms?.map(({ platform }) => (
                 //replace w images later
                 <h3 key={platform.id}>{platform.name}</h3>
               ))}
