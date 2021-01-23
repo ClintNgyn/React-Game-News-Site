@@ -33,10 +33,23 @@ const Home = () => {
     dispatch(loadGames());
   }, [dispatch]);
 
-  // State
+  // Variables from State
   const { popularGames, upComingGames, newGames } = useSelector(
     (state) => state.games
   );
+
+  // Functions
+  const displayGames = (games = []) => {
+    return games.map(({ id, name, released, background_image }) => (
+      <Game
+        key={id}
+        id={id}
+        name={name}
+        released={released}
+        background_image={background_image}
+      />
+    ));
+  };
 
   return (
     <div>
@@ -44,43 +57,13 @@ const Home = () => {
 
       <GameList>
         <h2>Upcoming Games</h2>
-        <Games>
-          {upComingGames?.map(({ id, name, released, background_image }) => (
-            <Game
-              key={id}
-              id={id}
-              name={name}
-              released={released}
-              background_image={background_image}
-            />
-          ))}
-        </Games>
+        <Games>{displayGames(upComingGames)}</Games>
 
         <h2>Popular Games</h2>
-        <Games>
-          {popularGames?.map(({ id, name, released, background_image }) => (
-            <Game
-              key={id}
-              id={id}
-              name={name}
-              released={released}
-              background_image={background_image}
-            />
-          ))}
-        </Games>
+        <Games>{displayGames(popularGames)}</Games>
 
         <h2>New Games</h2>
-        <Games>
-          {newGames?.map(({ id, name, released, background_image }) => (
-            <Game
-              key={id}
-              id={id}
-              name={name}
-              released={released}
-              background_image={background_image}
-            />
-          ))}
-        </Games>
+        <Games>{displayGames(newGames)}</Games>
       </GameList>
     </div>
   );
