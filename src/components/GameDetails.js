@@ -38,7 +38,8 @@ const Detail = styled(motion.div)`
 
 const GameDetails = () => {
   const { game, screenshots } = useSelector((state) => state.gameDetails);
-  const { name, rating, platforms, description_raw, background_image } = game;
+  const { name, rating, platforms, description_raw, background_image } =
+    game ?? {};
 
   return (
     <CardShadow>

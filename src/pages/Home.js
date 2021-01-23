@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -26,14 +27,16 @@ const Games = styled(motion.div)`
 `;
 
 const Home = () => {
-  const dispatch = useDispatch();
+  // Get Game's Path
+  const pathId = useLocation().pathname.split('/')[2];
 
   // Fetch data
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadGames());
   }, [dispatch]);
 
-  // Variables from State
+  // State
   const { popularGames, upComingGames, newGames } = useSelector(
     (state) => state.games
   );
@@ -53,7 +56,7 @@ const Home = () => {
 
   return (
     <div>
-      {/* <GameDetails /> */}
+      {pathId && <GameDetails />}
 
       <GameList>
         <h2>Upcoming Games</h2>

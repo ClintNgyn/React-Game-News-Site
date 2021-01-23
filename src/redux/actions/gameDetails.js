@@ -10,7 +10,7 @@ export const loadGameDetails = (id) => async (dispatch) => {
   dispatch({
     type: 'GET_DETAILS',
     payload: {
-      game: game.data.results,
+      game: game.data,
       screenshots: screenshots.data.results,
     },
   });
