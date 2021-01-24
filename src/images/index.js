@@ -8,7 +8,7 @@ import starFull from './star-full.png';
 import PC from './steam.svg';
 import Xbox from './xbox.svg';
 
-const platformImgAlias = {
+const platformImages = {
   PlayStation,
   Xbox,
   PC,
@@ -16,4 +16,4 @@ const platformImgAlias = {
   iOS,
   gamepad,
 };
-export { iOS, gamepad, logo, Nintendo, PlayStation, starEmpty, starFull, PC, Xbox, platformImgAlias };
+export { iOS, gamepad, logo, Nintendo, PlayStation, starEmpty, starFull, PC, Xbox, platformImages };
