@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+import { cropImage } from '../utils';
 
 // Styled Components
 const CardShadow = styled(motion.div)`
@@ -37,12 +40,17 @@ const Detail = styled(motion.div)`
 `;
 
 const GameDetails = () => {
+  const history = useHistory();
   const { game, screenshots } = useSelector((state) => state.gameDetails);
-  const { name, rating, platforms, description_raw, background_image } =
-    game ?? {};
+  const { name, rating, platforms, description_raw, background_image } = game ?? {};
+
+  const cardUnfocusedHandler = ({ target: { className } }) => {
+    history.push('/');
+    className.includes('shadow') && (document.body.style.overflow = 'visible');
+  };
 
   return (
-    <CardShadow>
+    <CardShadow className='shadow' onClick={cardUnfocusedHandler}>
       <Detail>
         <div className='stats'>
           <div className='ratings'>
@@ -62,7 +70,7 @@ const GameDetails = () => {
         </div>
 
         <div className='media'>
-          <img src={background_image} alt={name} />
+          <img src={cropImage(background_image)} alt={name} />
         </div>
 
         <div className='description'>
@@ -71,7 +79,7 @@ const GameDetails = () => {
 
         <div className='gallery'>
           {screenshots.map(({ id, image }) => (
-            <img key={id} src={image} alt={name} />
+            <img key={id} src={cropImage(image)} alt={name} />
           ))}
         </div>
       </Detail>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getGameDetails, getGameScreenshots } from '../../utils/api';
+import { getGameDetails, getGameScreenshots } from '../../api';
 
 export const loadGameDetails = (id) => async (dispatch) => {
   const [game, screenshots] = await Promise.all([

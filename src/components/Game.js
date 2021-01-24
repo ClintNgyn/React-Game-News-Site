@@ -6,14 +6,20 @@ import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { loadGameDetails } from '../redux/actions';
 
+import { cropImage } from '../utils';
+
 // Styled Components
 const StyledGame = styled(motion.div)`
-  min-height: 30vh;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
+  min-height: 30vh;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+
+  p {
+    padding: 0.5rem;
+  }
+
   img {
     width: 100%;
     height: 40vh;
@@ -26,6 +32,7 @@ const Game = ({ id, name, released, background_image }) => {
 
   const loadDetailsHandler = () => {
     dispatch(loadGameDetails(id));
+    document.body.style.overflow = 'hidden';
   };
 
   return (
@@ -33,7 +40,7 @@ const Game = ({ id, name, released, background_image }) => {
       <Link to={`/game/${id}`}>
         <h3>{name}</h3>
         <p>{released}</p>
-        <img src={background_image} alt={name} />
+        <img src={cropImage(background_image)} alt={name} />
       </Link>
     </StyledGame>
   );

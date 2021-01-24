@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-import {
-  getPopularGames,
-  getUpComingGames,
-  getNewGames,
-} from '../../utils/api';
+import { getPopularGames, getUpComingGames, getNewGames } from '../../api';
 
 export const loadGames = () => async (dispatch) => {
   const [popularGames, upComingGames, newGames] = await Promise.all([
