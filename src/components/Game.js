@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { loadGameDetails } from '../redux/actions';
 
-import { cropImage } from '../utils';
+import { changeImageResolution } from '../utils';
 
 // Styled Components
 const StyledGame = styled(motion.div)`
@@ -38,9 +38,9 @@ const Game = ({ id, name, released, background_image }) => {
   return (
     <StyledGame layoutId={id} onClick={loadDetailsHandler}>
       <Link to={`/game/${id}`}>
-        <h3>{name}</h3>
+        <motion.h3 layoutId={`title${id}`}>{name}</motion.h3>
         <p>{released}</p>
-        <img src={cropImage(background_image)} alt={name} />
+        <motion.img layoutId={`image${id}`} src={changeImageResolution(background_image)} alt={name} />
       </Link>
     </StyledGame>
   );

@@ -1,3 +1,3 @@
-import { cropImage } from './cropImage';
+import { changeImageResolution } from './changeImageResolution';
 
-export { cropImage };
+export { changeImageResolution };
