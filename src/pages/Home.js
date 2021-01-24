@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loadGames } from '../redux/actions';
@@ -28,7 +28,7 @@ const Games = styled(motion.div)`
 
 const Home = () => {
   // Get Game's Path
-  const pathId = useLocation().pathname.split('/')[2];
+  const pathId = +useLocation().pathname.split('/')[2];
 
   // Fetch data
   const dispatch = useDispatch();
@@ -37,28 +37,20 @@ const Home = () => {
   }, [dispatch]);
 
   // State
-  const { popularGames, upComingGames, newGames } = useSelector(
-    (state) => state.games
-  );
+  const { popularGames, upComingGames, newGames } = useSelector((state) => state.games);
 
   // Functions
   const displayGames = (games = []) => {
     return games.map(({ id, name, released, background_image }) => (
-      <Game
-        key={id}
-        id={id}
-        name={name}
-        released={released}
-        background_image={background_image}
-      />
+      <Game key={id} id={id} name={name} released={released} background_image={background_image} />
     ));
   };
 
   return (
-    <div>
-      {pathId && <GameDetails />}
+    <GameList>
+      <AnimateSharedLayout type='crossfade'>
+        <AnimatePresence> {pathId && <GameDetails pathId={pathId} />}</AnimatePresence>
 
-      <GameList>
         <h2>Upcoming Games</h2>
         <Games>{displayGames(upComingGames)}</Games>
 
@@ -67,8 +59,8 @@ const Home = () => {
 
         <h2>New Games</h2>
         <Games>{displayGames(newGames)}</Games>
-      </GameList>
-    </div>
+      </AnimateSharedLayout>
+    </GameList>
   );
 };
 

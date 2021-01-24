@@ -39,7 +39,7 @@ const Detail = styled(motion.div)`
   }
 `;
 
-const GameDetails = () => {
+const GameDetails = ({ pathId }) => {
   const history = useHistory();
   const { game, screenshots } = useSelector((state) => state.gameDetails);
   const { name, rating, platforms, description_raw, background_image } = game ?? {};
@@ -51,7 +51,7 @@ const GameDetails = () => {
 
   return (
     <CardShadow className='shadow' onClick={cardUnfocusedHandler}>
-      <Detail>
+      <Detail layoutId={pathId}>
         <div className='stats'>
           <div className='ratings'>
             <h3>{name}</h3>
