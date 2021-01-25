@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { popup } from '../utils';
 
 import { useDispatch } from 'react-redux';
 import { loadGameDetails } from '../redux/actions';
@@ -15,11 +16,12 @@ const StyledGame = styled(motion.div)`
   cursor: pointer;
   min-height: 30vh;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-
+  h3 {
+    color: #333;
+  }
   p {
     padding: 0.5rem;
   }
-
   img {
     width: 100%;
     height: 40vh;
@@ -36,11 +38,21 @@ const Game = ({ id, name, released, background_image }) => {
   };
 
   return (
-    <StyledGame layoutId={id} onClick={loadDetailsHandler}>
+    <StyledGame
+      variants={popup}
+      initial='hidden'
+      animate='show'
+      layoutId={id}
+      onClick={loadDetailsHandler}
+    >
       <Link to={`/game/${id}`}>
         <motion.h3 layoutId={`title${id}`}>{name}</motion.h3>
         <p>{released}</p>
-        <motion.img layoutId={`image${id}`} src={changeImageResolution(background_image)} alt={name} />
+        <motion.img
+          layoutId={`image${id}`}
+          src={changeImageResolution(background_image)}
+          alt={name}
+        />
       </Link>
     </StyledGame>
   );

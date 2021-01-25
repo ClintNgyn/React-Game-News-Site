@@ -1,4 +1,4 @@
-import { loadGames } from './games';
+import { loadGames, fetchSearch } from './games';
 import { loadGameDetails } from './gameDetails';
 
-export { loadGames, loadGameDetails };
+export { loadGames, loadGameDetails, fetchSearch };

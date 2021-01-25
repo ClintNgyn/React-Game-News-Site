@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { fadeIn } from '../utils';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loadGames } from '../redux/actions';
@@ -36,8 +37,10 @@ const Home = () => {
     dispatch(loadGames());
   }, [dispatch]);
 
-  // State
-  const { popularGames, upComingGames, newGames } = useSelector((state) => state.games);
+  // Variables from redux
+  const { popularGames, upComingGames, newGames, searchedGames } = useSelector(
+    (state) => state.games,
+  );
 
   // Functions
   const displayGames = (games = []) => {
@@ -47,9 +50,18 @@ const Home = () => {
   };
 
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial='hidden' animate='show'>
       <AnimateSharedLayout type='crossfade'>
         <AnimatePresence> {pathId && <GameDetails pathId={pathId} />}</AnimatePresence>
+
+        {searchedGames.length ? (
+          <div className='searched'>
+            <h2>Searched Games</h2>
+            <Games>{displayGames(searchedGames)}</Games>
+          </div>
+        ) : (
+          ''
+        )}
 
         <h2>Upcoming Games</h2>
         <Games>{displayGames(upComingGames)}</Games>

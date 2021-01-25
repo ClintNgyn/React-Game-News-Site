@@ -1,5 +1,6 @@
+import GlobalStyles from './GlobalStyles';
 import Game from './Game';
 import GameDetails from './GameDetails';
-import GlobalStyles from './GlobalStyles';
+import Nav from './Nav';
 
-export { Game, GameDetails, GlobalStyles };
+export { GlobalStyles, Game, GameDetails, Nav };

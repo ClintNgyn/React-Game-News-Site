@@ -5,8 +5,12 @@ const base_url = 'https://api.rawg.io/api';
 const year = new Date().getFullYear();
 const _month_day = moment().format(`-MM-DD`);
 
-const fullUrl = (dates, ordering, page_size = 15) => {
+const fullUrl = (dates, ordering, page_size = 10) => {
   return `${base_url}/games?dates=${dates}&ordering=-${ordering}&page_size=${page_size}`;
+};
+
+export const getSearchedGames = (search, page_size = 15) => {
+  return `${base_url}/games?search=${search}&page_size=${page_size}`;
 };
 
 export const getPopularGames = () => {
