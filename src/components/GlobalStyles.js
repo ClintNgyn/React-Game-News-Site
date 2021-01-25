@@ -22,6 +22,10 @@ const GlobalStyles = createGlobalStyle`
     color: #333;
   }
 
+  a:active, a:visited {
+  color: #333;
+  }
+
   h2 {
     font-family: 'Abril Fatface', cursive;
     font-size: 2.5rem;

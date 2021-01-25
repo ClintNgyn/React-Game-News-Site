@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { changeImageResolution, paragraphFormatter } from '../utils';
-import { platformImages } from '../images';
+import { platformImages, starEmpty, starFull } from '../images';
 
 // Styled Components
 const CardShadow = styled(motion.div)`
@@ -51,6 +51,15 @@ const Stats = styled(motion.div)`
     font-size: 1.4rem;
   }
 `;
+
+const Ratings = styled(motion.div)`
+  img {
+    display: inline;
+    height: 1rem;
+    width: 1rem;
+  }
+`;
+
 const Info = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -61,6 +70,7 @@ const Info = styled(motion.div)`
     margin: auto 0;
   }
 `;
+
 const Platforms = styled(motion.div)`
   img {
     width: 1.4rem;
@@ -84,17 +94,31 @@ const Description = styled(motion.div)`
   h4 {
     padding: 0.5rem 0;
   }
+  p {
+    font-size: 0.95rem;
+  }
 `;
 
 const Gallery = styled(motion.div)`
   h4 {
     padding: 0.5rem 0;
   }
-
   img {
     margin: 0.3rem 0;
   }
 `;
+
+// Functions
+const displayStars = (mRating) => {
+  const stars = [];
+  mRating = Math.round(mRating);
+
+  for (let i = 0; i < 5; i++) {
+    stars.push(<img src={i < mRating ? starFull : starEmpty} alt={mRating} />);
+  }
+
+  return stars;
+};
 
 const GameDetails = ({ pathId }) => {
   // Variables
@@ -113,10 +137,10 @@ const GameDetails = ({ pathId }) => {
     <CardShadow className='shadow' onClick={cardUnfocusedHandler}>
       <Detail layoutId={pathId}>
         <Stats>
-          <div className='ratings'>
+          <Ratings>
             <motion.h3 layoutId={`title${pathId}`}>{name}</motion.h3>
-            <p>Rating: {rating}</p>
-          </div>
+            <p>Rating: {displayStars(rating)}</p>
+          </Ratings>
 
           <Info>
             <h3>Platforms</h3>
@@ -147,7 +171,6 @@ const GameDetails = ({ pathId }) => {
 
         <Gallery>
           <h4>Screenshots</h4>
-
           {screenshots.map(({ id, image }) => (
             <img key={id} src={changeImageResolution(image)} alt={name} />
           ))}
