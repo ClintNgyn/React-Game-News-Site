@@ -128,9 +128,9 @@ const GameDetails = ({ pathId }) => {
   const { name, rating, parent_platforms, description_raw, background_image } = game ?? {};
 
   // Functions
-  const cardUnfocusedHandler = ({ target: { className } }) => {
+  const cardUnfocusedHandler = () => {
     history.push('/');
-    className.includes('shadow') && (document.body.style.overflow = 'visible');
+    document.body.style.overflow = 'visible';
   };
 
   return (
